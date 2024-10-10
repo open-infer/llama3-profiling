@@ -29,7 +29,8 @@ with profile(
         on_trace_ready=trace_handler,
         record_shapes=True,
         profile_memory=True,
-        with_stack=True
+        with_stack=True,
+        with_flops=True
 ) as prof:
     for _ in range(1 + 1 + 3):
         model(x)
