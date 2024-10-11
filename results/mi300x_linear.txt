@@ -1,0 +1,34 @@
+root@291de7fdb103:/workspace/llama3-profiling# ./.venv/bin/python benchmark_linear.py
+Using 'cuda'
+=============================================
+
+
+BENCHMARKING
+=============================================
+Total time spent in '1000' iterations: '0.09506214316934347'
+
+
+PROFILING
+=============================================
+[W1011 17:04:00.064336039 collection.cpp:1048] Warning: ROCTracer produced duplicate flow start: 4 (function operator())
+Profiling summary after step '5':
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  Total MFLOPs
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+Cijk_Alik_Bljk_SB_MT64x32x32_MI16x16x4x1_SN_1LDSB1_A...         0.00%       0.000us         0.00%       0.000us       0.000us     107.802us        48.95%     107.802us      26.950us           0 b           0 b           0 b           0 b             4            --
+                                            aten::addmm         6.08%     107.050us         8.40%     148.052us      49.351us      95.303us        43.28%      95.303us      31.768us           0 b           0 b      24.00 Kb      24.00 Kb             3        25.166
+                                          ProfilerStep*         0.00%       0.000us         0.00%       0.000us       0.000us      95.303us        43.28%      95.303us      31.768us           0 b           0 b           0 b           0 b             3            --
+                         Memcpy DtoD (Device -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us      17.105us         7.77%      17.105us       4.276us           0 b           0 b           0 b           0 b             4            --
+                                          ProfilerStep*         9.59%     168.913us        21.90%     385.918us     128.639us       0.000us         0.00%      95.303us      31.768us           0 b           0 b           0 b     -24.00 Kb             3            --
+                                           aten::linear         1.22%      21.562us        12.32%     217.005us      72.335us       0.000us         0.00%      95.303us      31.768us           0 b           0 b      24.00 Kb           0 b             3            --
+                                                aten::t         1.29%      22.815us         2.69%      47.391us      15.797us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             3            --
+                                        aten::transpose         1.15%      20.339us         1.39%      24.576us       8.192us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             3            --
+                                       aten::as_strided         0.32%       5.560us         0.32%       5.560us       0.927us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             6            --
+                                           aten::expand         0.33%       5.898us         0.41%       7.221us       2.407us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             3            --
+                                         hipMemcpyAsync         1.24%      21.793us         1.24%      21.793us       7.264us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             3            --
+                            hipGetDevicePropertiesR0600         0.08%       1.342us         0.08%       1.342us       0.447us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             3            --
+                               hipExtModuleLaunchKernel         0.60%      10.646us         0.60%      10.646us       3.549us       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             3            --
+                                   hipDeviceSynchronize        78.10%       1.376ms        78.10%       1.376ms       1.376ms       0.000us         0.00%       0.000us       0.000us           0 b           0 b           0 b           0 b             1            --
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+Self CPU time total: 1.762ms
+Self CUDA time total: 220.210us

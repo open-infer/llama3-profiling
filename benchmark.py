@@ -31,7 +31,6 @@ def run(initializer: Callable[[str], tuple[Callable, tuple]]) -> None:
         model(*args)
         run_time = perf_counter() - start_time
         total_run_time += run_time
-        print(f"Iteration: '{i}', time spent: '{run_time}'")
 
     print(f"Total time spent in '{n}' iterations: '{total_run_time}'")
 
